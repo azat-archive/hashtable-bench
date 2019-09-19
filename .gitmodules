@@ -1,0 +1,12 @@
+[submodule "contrib/sparse-map"]
+	path = contrib/sparse-map
+	url = https://github.com/Tessil/sparse-map.git
+[submodule "contrib/robin-hood-hashing"]
+	path = contrib/robin-hood-hashing
+	url = https://github.com/martinus/robin-hood-hashing.git
+[submodule "contrib/parallel-hashmap"]
+	path = contrib/parallel-hashmap
+	url = https://github.com/greg7mdp/parallel-hashmap.git
+[submodule "contrib/sparsepp"]
+	path = contrib/sparsepp
+	url = https://github.com/greg7mdp/sparsepp.git

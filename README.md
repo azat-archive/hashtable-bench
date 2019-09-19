@@ -1,0 +1,11 @@
+| container                                                                                     | insert     | find      | maxrss       |
+| -----------------------------                                                                 | ---------- | --------- | ------------ |
+| [`google::sparse_hash_map`](https://github.com/sparsehash)                                    | 8.99111    | 1.77821   | **212MiB**   |
+| [`tsl::sparse_map`](https://github.com/Tessil/sparse-map)                                     | 4.03314    | 1.67305   | 214MiB       |
+| [`sparsepp`](https://github.com/greg7mdp/sparsepp)                                            | 9.22349    | 1.94537   | 230MiB       |
+| [`folly::F14VectorMap`](https://github.com/facebook/folly/blob/master/folly/container/F14.md) | 3.03167    | 1.19759   | 265MiB       |
+| [`folly::F14FastMap`](https://github.com/facebook/folly/blob/master/folly/container/F14.md)   | 2.52551    | 1.28362   | 393MiB       |
+| [`robin_hood::unordered_map`](https://github.com/martinus/robin-hood-hashing)                 | 3.13724    | 3.12645   | 411MiB       |
+| [`phmap::flat_hash_map`](https://github.com/greg7mdp/parallel-hashmap)                        | 3.13384    | 3.92058   | 411MiB       |
+| [`folly::F14NodeMap`](https://github.com/facebook/folly/blob/master/folly/container/F14.md)   | 3.42903    | 1.23989   | 441MiB       |
+| [`google::dense_hash_map`](https://github.com/sparsehash)                                     | 1.80534    | 1.17399   | 771MiB       |
