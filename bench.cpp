@@ -91,6 +91,9 @@ void find(C &c)
     }
 }
 
+double tv2usec(const struct timeval &tv)
+{ return tv.tv_sec * 1e6 + tv.tv_usec; }
+
 int main(int argc, char **argv)
 {
     map_t map;
@@ -105,7 +108,13 @@ int main(int argc, char **argv)
     if (getrusage(RUSAGE_SELF, &rusage_data)) {
         throw std::runtime_error("getrusage");
     }
+
+    double cpu = 0.;
+    cpu += tv2usec(rusage_data.ru_utime); // user
+    cpu += tv2usec(rusage_data.ru_stime); // system
+
     std::cout << name << "/maxrss: " << (rusage_data.ru_maxrss>>10) << "MiB \n";
+    std::cout << name << "/time:   " << cpu/1e3 << " msec (user+sys)\n";
 
     return EXIT_SUCCESS;
 }
