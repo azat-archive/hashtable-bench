@@ -6,7 +6,7 @@ find_library(XXHASH_LIBRARY xxhash)
 
 set(BENCH)
 
-macro(add_bench exe def)
+macro(add_bench_impl exe def)
     add_executable(${exe} bench.cpp)
     set_target_properties(${exe} PROPERTIES COMPILE_FLAGS ${def})
     target_link_libraries(${exe} ${XXHASH_LIBRARY} ${ARGN})
@@ -15,6 +15,10 @@ macro(add_bench exe def)
         COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${exe}
         DEPENDS ${exe})
     list(APPEND BENCH ${exe}-run)
+endmacro()
+macro(add_bench exe def)
+    add_bench_impl(${exe} "${def}")
+    add_bench_impl(${exe}-preallocate "${def} -DPREALLOCATE")
 endmacro()
 
 add_bench(bench-sparse_hash -DSPARSE_HASH)

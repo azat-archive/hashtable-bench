@@ -97,6 +97,9 @@ double tv2usec(const struct timeval &tv)
 int main(int argc, char **argv)
 {
     map_t map;
+#ifdef PREALLOCATE
+    map.reserve(KEYS);
+#endif
 #ifdef DENSE_HASH
     map.set_empty_key(UINT64_MAX);
 #endif
