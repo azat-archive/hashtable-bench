@@ -73,7 +73,7 @@ void insert(C &c)
     for (uint64_t i = 0; i < KEYS; ++i) {
 #ifdef PREALLOCATE_BLOCK
         if ((i % PREALLOCATE_BLOCK) == 0) {
-            c.reserve(c.size() + KEYS);
+            c.resize(c.size() + KEYS);
         }
 #endif
 
@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 {
     map_t map;
 #ifdef PREALLOCATE
-    map.reserve(KEYS);
+    map.resize(KEYS);
 #endif
 #ifdef DENSE_HASH
     map.set_empty_key(UINT64_MAX);
