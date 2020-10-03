@@ -73,7 +73,7 @@ void insert(C &c)
     for (uint64_t i = 0; i < KEYS; ++i) {
 #ifdef PREALLOCATE_BLOCK
         if ((i % PREALLOCATE_BLOCK) == 0) {
-            c.resize(c.size() + KEYS);
+            c.resize(c.size() + PREALLOCATE_BLOCK);
         }
 #endif
 
