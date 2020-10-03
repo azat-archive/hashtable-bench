@@ -106,6 +106,7 @@ int main(int argc, char **argv)
 
     map_t map;
 #ifdef PREALLOCATE
+    std::cout << name << "/resize: " << KEYS << "\n";
     map.resize(KEYS);
 #endif
 #ifdef DENSE_HASH
