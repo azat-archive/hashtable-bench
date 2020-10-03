@@ -19,6 +19,7 @@ endmacro()
 macro(add_bench exe def)
     add_bench_impl(${exe} "${def}")
     add_bench_impl(${exe}-preallocate "${def} -DPREALLOCATE")
+    add_bench_impl(${exe}-preallocate-block "${def} -DPREALLOCATE_BLOCK=65535")
 endmacro()
 
 add_bench(bench-sparse_hash -DSPARSE_HASH)

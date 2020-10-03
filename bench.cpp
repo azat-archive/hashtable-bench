@@ -71,6 +71,12 @@ template <class C>
 void insert(C &c)
 {
     for (uint64_t i = 0; i < KEYS; ++i) {
+#ifdef PREALLOCATE_BLOCK
+        if ((i % PREALLOCATE_BLOCK) == 0) {
+            c.reserve(c.size() + KEYS);
+        }
+#endif
+
 #ifdef ROBIN_HOOD_HASHING
         c.insert(robin_hood::pair<uint64_t, uint64_t>(hash(i), i));
 #else
