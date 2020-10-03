@@ -102,6 +102,8 @@ double tv2usec(const struct timeval &tv)
 
 int main(int argc, char **argv)
 {
+    std::cout << name << "/keys: " << KEYS << "\n";
+
     map_t map;
 #ifdef PREALLOCATE
     map.resize(KEYS);
