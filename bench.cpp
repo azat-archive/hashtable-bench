@@ -67,13 +67,19 @@ auto elapsed(const F &f, Args &&... args)
 static inline uint64_t hash(uint64_t key)
 { return XXH64((void *)&key, sizeof(key), 0); }
 
+// Preallocate: resize (sparsehash, ...) OR reserve (f14)
+template <class T>
+auto preallocate(T &t, size_t capacity) -> decltype(t.resize(capacity)) { t.resize(capacity); }
+template <class T>
+auto preallocate(T &t, size_t capacity) -> decltype(t.reserve(capacity)) { t.reserve(capacity); }
+
 template <class C>
 void insert(C &c)
 {
     for (uint64_t i = 0; i < KEYS; ++i) {
 #ifdef PREALLOCATE_BLOCK
         if ((i % PREALLOCATE_BLOCK) == 0) {
-            c.resize(c.size() + PREALLOCATE_BLOCK);
+            preallocate(c, c.size() + PREALLOCATE_BLOCK);
         }
 #endif
 
@@ -107,7 +113,7 @@ int main(int argc, char **argv)
     map_t map;
 #ifdef PREALLOCATE
     std::cout << name << "/resize: " << KEYS << "\n";
-    map.resize(KEYS);
+    preallocate(map, KEYS);
 #endif
 #ifdef DENSE_HASH
     map.set_empty_key(UINT64_MAX);
