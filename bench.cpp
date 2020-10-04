@@ -68,10 +68,20 @@ static inline uint64_t hash(uint64_t key)
 { return XXH64((void *)&key, sizeof(key), 0); }
 
 // Preallocate: resize (sparsehash, ...) OR reserve (f14)
-template <class T>
-auto preallocate(T &t, size_t capacity) -> decltype(t.resize(capacity)) { t.resize(capacity); }
-template <class T>
-auto preallocate(T &t, size_t capacity) -> decltype(t.reserve(capacity)) { t.reserve(capacity); }
+template <typename T>
+concept ContainerWithResize = requires(T a)
+{
+    a.resize(0);
+};
+template <typename T>
+concept ContainerWithReserve = requires(T a)
+{
+    a.reserve(0);
+};
+template <class T> requires ContainerWithResize<T> && (!ContainerWithReserve<T>)
+void preallocate(T &t, size_t capacity) { t.resize(capacity); }
+template <class T> requires ContainerWithReserve<T>
+void preallocate(T &t, size_t capacity) { t.reserve(capacity); }
 
 template <class C>
 void insert(C &c)

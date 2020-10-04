@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 3.15)
 list(REVERSE CMAKE_FIND_LIBRARY_SUFFIXES)
 find_library(XXHASH_LIBRARY xxhash)
 
+set(CMAKE_CXX_STANDARD 20)
+
 set(BENCH)
 
 macro(add_bench_impl exe def)
