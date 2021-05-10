@@ -33,6 +33,7 @@ add_bench(bench-sparse_hash -DSPARSE_HASH)
 add_bench(bench-dense_hash -DDENSE_HASH)
 add_bench(bench-tsl_sparse -DTSL_SPARSE)
 add_bench(bench-robin_hood -DROBIN_HOOD_HASHING)
+add_bench(bench-robin_hood-max95 "-DROBIN_HOOD_HASHING -DMAX_LOAD_FACTOR=95")
 add_bench(bench-parallel_hashmap -DPARALLEL_HASHMAP)
 add_bench(bench-sparsepp -DSPARSEPP)
 

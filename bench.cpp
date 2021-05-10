@@ -35,8 +35,13 @@ using map_t = tsl::sparse_map<uint64_t, uint64_t>;
 static std::string name("tsl_sparse");
 #elif defined(ROBIN_HOOD_HASHING)
 #include <robin_hood.h>
+#  if !defined(MAX_LOAD_FACTOR)
 using map_t = robin_hood::unordered_map<uint64_t, uint64_t>;
 static std::string name("robin_hood");
+#  else
+using map_t = robin_hood::unordered_map<uint64_t, uint64_t, robin_hood::hash<uint64_t>, std::equal_to<uint64_t>, MAX_LOAD_FACTOR>;
+static std::string name(std::string("robin_hood_") + std::to_string(MAX_LOAD_FACTOR));
+#  endif
 #elif defined(PARALLEL_HASHMAP)
 #include <parallel_hashmap/phmap.h>
 using map_t = phmap::flat_hash_map<uint64_t, uint64_t>;
