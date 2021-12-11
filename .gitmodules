@@ -13,3 +13,6 @@
 [submodule "contrib/xxhash"]
 	path = contrib/xxhash
 	url = https://github.com/Cyan4973/xxHash.git
+[submodule "contrib/sparsehash-c11"]
+	path = contrib/sparsehash-c11
+	url = https://github.com/sparsehash/sparsehash-c11.git

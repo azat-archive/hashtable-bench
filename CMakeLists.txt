@@ -28,6 +28,7 @@ macro(add_bench exe def)
     add_bench_impl(${exe}-preallocate-block "${def} -DPREALLOCATE_BLOCK=65535")
 endmacro()
 
+include_directories(contrib/sparsehash-c11)
 include_directories(contrib/sparse-map/include)
 include_directories(contrib/robin-hood-hashing/src/include)
 include_directories(contrib/parallel-hashmap)
