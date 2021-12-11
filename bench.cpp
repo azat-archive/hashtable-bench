@@ -98,8 +98,10 @@ void insert(C &c)
         }
 #endif
 
-#ifdef ROBIN_HOOD_HASHING
+#if defined(ROBIN_HOOD_HASHING)
         c.insert(robin_hood::pair<uint64_t, uint64_t>(hash(i), i));
+#elif defined(SEQ)
+        c.insert(std::make_pair(i, i));
 #else
         c.insert(std::make_pair(hash(i), i));
 #endif
@@ -111,7 +113,11 @@ void find(C &c)
 {
     uint64_t found = 0;
     for (uint64_t i = 0; i < KEYS; ++i) {
+#if defined(SEQ)
+        found += (c.find(i) != c.end());
+#else
         found += (c.find(hash(i)) != c.end());
+#endif
     }
     if (found != KEYS) {
         throw std::runtime_error("mismatch");
