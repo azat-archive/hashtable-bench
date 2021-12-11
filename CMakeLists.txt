@@ -1,6 +1,7 @@
 project(ht-bench)
 cmake_minimum_required(VERSION 3.15)
 
+# prefer archive libraries over shared
 list(REVERSE CMAKE_FIND_LIBRARY_SUFFIXES)
 find_library(XXHASH_LIBRARY xxhash)
 
