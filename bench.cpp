@@ -9,14 +9,42 @@
 #include <sys/resource.h>
 #include <string>
 
+/// Copied from ClickHouse
+/// https://github.com/ClickHouse/ClickHouse/blob/master/src/Common/HashTable/Hash.h
+inline size_t intHash64(size_t x)
+{
+    x ^= x >> 33;
+    x *= 0xff51afd7ed558ccdULL;
+    x ^= x >> 33;
+    x *= 0xc4ceb9fe1a85ec53ULL;
+    x ^= x >> 33;
+
+    return x;
+}
+struct ClickHouseHash
+{
+    size_t operator() (size_t key) const
+    {
+        return intHash64(key);
+    }
+};
+
 #if defined(SPARSE_HASH)
 #include <sparsehash/sparse_hash_map>
 using map_t = google::sparse_hash_map<uint64_t, uint64_t>;
 static std::string name("sparse_hash");
+#elif defined(SPARSE_HASH_CH)
+#include <sparsehash/sparse_hash_map>
+using map_t = google::sparse_hash_map<uint64_t, uint64_t, ClickHouseHash>;
+static std::string name("sparse_hash_ch");
 #elif defined(DENSE_HASH)
 #include <sparsehash/dense_hash_map>
 using map_t = google::dense_hash_map<uint64_t, uint64_t>;
 static std::string name("dense_hash");
+#elif defined(DENSE_HASH_CH)
+#include <sparsehash/dense_hash_map>
+using map_t = google::dense_hash_map<uint64_t, uint64_t, ClickHouseHash>;
+static std::string name("dense_hash_ch");
 #elif defined(F14)
 #include <folly/container/F14Map.h>
 using map_t = folly::F14FastMap<uint64_t, uint64_t>;
