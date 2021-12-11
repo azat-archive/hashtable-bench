@@ -10,3 +10,6 @@
 [submodule "contrib/sparsepp"]
 	path = contrib/sparsepp
 	url = https://github.com/greg7mdp/sparsepp.git
+[submodule "contrib/xxhash"]
+	path = contrib/xxhash
+	url = https://github.com/Cyan4973/xxHash.git

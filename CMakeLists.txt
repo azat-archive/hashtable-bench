@@ -3,7 +3,9 @@ cmake_minimum_required(VERSION 3.15)
 
 # prefer archive libraries over shared
 list(REVERSE CMAKE_FIND_LIBRARY_SUFFIXES)
-find_library(XXHASH_LIBRARY xxhash)
+
+set(BUILD_SHARED_LIBS OFF)
+add_subdirectory(contrib/xxhash/cmake_unofficial EXCLUDE_FROM_ALL)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -12,7 +14,7 @@ set(BENCH)
 macro(add_bench_impl exe def)
     add_executable(${exe} bench.cpp)
     set_target_properties(${exe} PROPERTIES COMPILE_FLAGS ${def})
-    target_link_libraries(${exe} ${XXHASH_LIBRARY} ${ARGN})
+    target_link_libraries(${exe} xxhash ${ARGN})
 
     add_custom_target(${exe}-run
         COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${exe}
