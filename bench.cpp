@@ -164,7 +164,7 @@ int main(int argc, char **argv)
     std::cout << name << "/resize: " << KEYS << "\n";
     preallocate(map, KEYS);
 #endif
-#ifdef DENSE_HASH
+#if defined(DENSE_HASH) || defined(DENSE_HASH_CH)
     map.set_empty_key(UINT64_MAX);
 #endif
 
