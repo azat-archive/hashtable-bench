@@ -51,6 +51,6 @@ add_bench(bench-f14_vector -DF14_VECTOR Folly::folly)
 add_bench(bench-f14_node -DF14_NODE Folly::folly)
 
 message(STATUS "The following benchmarks has been added: ${BENCH}")
-add_custom_target(bench ALL
+add_custom_target(bench
     COMMENT "Run all benchmarks"
     DEPENDS ${BENCH})
