@@ -157,6 +157,16 @@ double tv2usec(const struct timeval &tv)
 
 int main(int argc, char **argv)
 {
+#ifdef PREALLOCATE
+    name += "_preallocate";
+#endif
+#ifdef SEQ
+    name += "_seq";
+#endif
+#ifdef PREALLOCATE_BLOCK
+    name =+ "_preallocate_block";
+#endif
+
     std::cout << name << "/keys: " << KEYS << "\n";
 
     map_t map;
