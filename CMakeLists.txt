@@ -44,11 +44,13 @@ add_bench(bench-robin_hood-max95 "-DROBIN_HOOD_HASHING -DMAX_LOAD_FACTOR=95")
 add_bench(bench-parallel_hashmap -DPARALLEL_HASHMAP)
 add_bench(bench-sparsepp -DSPARSEPP)
 
-find_package(folly REQUIRED)
-find_package(Threads REQUIRED)
-add_bench(bench-f14 -DF14 Folly::folly)
-add_bench(bench-f14_vector -DF14_VECTOR Folly::folly)
-add_bench(bench-f14_node -DF14_NODE Folly::folly)
+find_package(folly)
+if (FOLLY_FOUND)
+    find_package(Threads REQUIRED)
+    add_bench(bench-f14 -DF14 Folly::folly)
+    add_bench(bench-f14_vector -DF14_VECTOR Folly::folly)
+    add_bench(bench-f14_node -DF14_NODE Folly::folly)
+endif()
 
 message(STATUS "The following benchmarks has been added: ${BENCH}")
 add_custom_target(bench
